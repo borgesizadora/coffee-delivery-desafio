@@ -10,6 +10,5 @@ export const LayoutContainer = styled.div`
 `
 
 export const Content = styled.div`
-  margin: 6.8rem auto 0;
-  height: 2000px;
+  margin: 6.8rem 0;
 `

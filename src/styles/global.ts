@@ -10,13 +10,20 @@ export const GlobalStyle = createGlobalStyle`
   a { 
     text-decoration: none;
   }
+
+  button {
+    background-color: transparent;
+    border: none;
+    line-height: 0;
+    cursor: pointer;
+  }
   
   body {
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme['base-title']};
     -webkit-font-smoothing: antialiased;
   }
-
+  
   body, input, textarea, button {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;

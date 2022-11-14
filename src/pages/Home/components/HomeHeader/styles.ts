@@ -30,6 +30,7 @@ export const HomeHeaderBackground = styled.div<{ backgroundImage: string }>`
     display: flex;
     height: 100%;
     width: 100vw;
+    max-width: 100%;
     position: absolute;
     z-index: -1;
     top: 50%;
@@ -64,6 +65,9 @@ export const HomeHeaderCoffeeImage = styled.div`
     height: 20rem;
     @media (min-width: 1440px) {
       height: 22.5rem;
+    }
+    @media (max-width: 1024px) {
+      display: none;
     }
   }
 `
