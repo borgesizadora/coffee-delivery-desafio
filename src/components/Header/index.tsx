@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
 
+import logoCoffeeDelivery from '~/assets/logo-coffee-delivery.svg'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
-import logoCoffeeDelivery from '../../assets/logo-coffee-delivery.svg'
 import * as S from './styles'
 
 export const Header = () => {

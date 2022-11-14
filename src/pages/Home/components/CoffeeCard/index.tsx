@@ -1,6 +1,6 @@
+import coffeeImage from '~/assets/expresso-tradicional.png'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 
-import coffeeImage from '../../../../assets/expresso-tradicional.png'
 import * as S from './styles'
 
 export const CoffeeCard = () => {

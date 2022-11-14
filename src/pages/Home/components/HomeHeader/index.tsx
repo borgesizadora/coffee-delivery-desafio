@@ -1,7 +1,7 @@
+import coffeeImage from '~/assets/coffee-image.png'
+import headerBackground from '~/assets/home-header-background.svg'
 import { ShoppingCart, Coffee, Package, Timer } from 'phosphor-react'
 
-import coffeeImage from '../../../../assets/coffee-image.png'
-import headerBackground from '../../../../assets/home-header-background.svg'
 import * as S from './styles'
 export const HomeHeader = () => {
   return (
