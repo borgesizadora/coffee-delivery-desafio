@@ -33,6 +33,8 @@ export const Input = styled.div<InputProps>`
       transition: all 0.2s;
       font-size: 0.875rem;
       color: ${theme['base-label']};
+      width: calc(100% - 0.75rem);
+      pointer-events: none;
     }
     span {
       position: absolute;
@@ -46,11 +48,12 @@ export const Input = styled.div<InputProps>`
     }
     input:focus ~ label,
     input:not(:placeholder-shown) ~ label {
-      transform: translate(-0.7rem, -2.5rem);
+      font-size: 0.75rem;
+      transform: translate(-0.7rem, -2.3rem);
     }
-    input:focus ~ span,
-    input:not(:placeholder-shown) ~ span {
-      transform: translate(5rem, -0.5rem);
+    input:focus ~ label > span,
+    input:not(:placeholder-shown) ~ label > span {
+      transform: translate(4.5rem, 1.5rem);
       opacity: 0;
     }
   `}
