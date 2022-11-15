@@ -14,7 +14,6 @@ export const GlobalStyle = createGlobalStyle`
   button {
     background-color: transparent;
     border: none;
-    line-height: 0;
     cursor: pointer;
   }
   

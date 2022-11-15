@@ -16,6 +16,9 @@ export const HeaderContent = styled.div`
   img {
     height: 2.5rem;
   }
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `
 
 export const HeaderNav = styled.nav`

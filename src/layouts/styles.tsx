@@ -11,4 +11,7 @@ export const LayoutContainer = styled.div`
 
 export const Content = styled.div`
   margin: 6.8rem 0;
+  @media (max-width: 768px) {
+    margin: 5rem 0;
+  }
 `
