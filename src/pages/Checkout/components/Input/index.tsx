@@ -10,8 +10,8 @@ interface InputProps {
 export const Input = ({ inputType, label, isOptional = false, size }: InputProps) => {
   return (
     <S.Input size={size}>
-      <input type={inputType} placeholder={label} />
-      <label>{label}</label>
+      <input id={label} type={inputType} placeholder={label} />
+      <label htmlFor={label}>{label}</label>
       {isOptional && <span>Opcional</span>}
     </S.Input>
   )

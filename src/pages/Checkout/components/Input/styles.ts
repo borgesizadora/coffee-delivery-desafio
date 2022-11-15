@@ -42,10 +42,16 @@ export const Input = styled.div<InputProps>`
       color: ${theme['base-label']};
       font-size: 0.75rem;
       font-style: italic;
+      transition: all 0.2s;
     }
     input:focus ~ label,
     input:not(:placeholder-shown) ~ label {
-      transform: translate(-0.7rem, -2.4rem);
+      transform: translate(-0.7rem, -2.5rem);
+    }
+    input:focus ~ span,
+    input:not(:placeholder-shown) ~ span {
+      transform: translate(5rem, -0.5rem);
+      opacity: 0;
     }
   `}
 `
