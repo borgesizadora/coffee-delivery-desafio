@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 
 import { CoffeeType } from '../..'
@@ -8,6 +10,14 @@ interface ICoffeeCard {
 }
 
 export const CoffeeCard = ({ coffee }: ICoffeeCard) => {
+  const [amountToAddToCart, setAmountToAddToCart] = useState(1)
+
+  function addOneItemToAmount() {
+    setAmountToAddToCart((amount) => amount + 1)
+  }
+  function removeOneItemToAmount() {
+    if (amountToAddToCart > 1) setAmountToAddToCart((amount) => amount - 1)
+  }
   return (
     <S.CoffeeCardWrapper>
       <S.CoffeeCardContainer>
@@ -28,11 +38,11 @@ export const CoffeeCard = ({ coffee }: ICoffeeCard) => {
           </S.CardPrice>
           <S.CartAndButtonsContainer>
             <S.AddRemoveButtons>
-              <button type="button" title="Remover uma unidade">
+              <button type="button" title="Remover uma unidade" onClick={removeOneItemToAmount}>
                 <Minus weight="bold" />
               </button>
-              <span>1</span>
-              <button type="button" title="Adicionar uma unidade">
+              <span>{amountToAddToCart}</span>
+              <button type="button" title="Adicionar uma unidade" onClick={addOneItemToAmount}>
                 <Plus weight="bold" />
               </button>
             </S.AddRemoveButtons>

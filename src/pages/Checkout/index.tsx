@@ -1,4 +1,4 @@
-import { Coffees } from '~/mocks/coffees'
+import { useCartContext } from '~/contexts/CartContext'
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
 
 import { AddressForm } from './components/AddressForm'
@@ -6,7 +6,9 @@ import { CheckoutCoffeeCard } from './components/CheckoutCoffeeCard'
 import * as S from './styles'
 
 export const Checkout = () => {
-  const coffee = Coffees[0]
+  const { itemsInCart, deliveryCost, totalForItems, paymentMethod, setPayment } = useCartContext()
+
+  const cartTotal = totalForItems + deliveryCost
 
   return (
     <S.CheckoutContainer>
@@ -24,15 +26,24 @@ export const Checkout = () => {
             </div>
           </header>
           <S.PaymentMethodContainer>
-            <S.PaymentMethod type="button">
+            <S.PaymentMethod
+              type="button"
+              isSelected={paymentMethod === 'CREDIT'}
+              onClick={() => setPayment('CREDIT')}>
               <CreditCard size={16} />
               <span>Cartão de crédito</span>
             </S.PaymentMethod>
-            <S.PaymentMethod type="button">
+            <S.PaymentMethod
+              type="button"
+              isSelected={paymentMethod === 'DEBIT'}
+              onClick={() => setPayment('DEBIT')}>
               <Bank size={16} />
               <span>Cartão de débito</span>
             </S.PaymentMethod>
-            <S.PaymentMethod type="button">
+            <S.PaymentMethod
+              type="button"
+              isSelected={paymentMethod === 'CASH'}
+              onClick={() => setPayment('CASH')}>
               <Money size={16} />
               <span>Dinheiro</span>
             </S.PaymentMethod>
@@ -43,22 +54,25 @@ export const Checkout = () => {
         <h3>Cafés selecionados</h3>
         <S.CheckoutItemsArea>
           <S.CoffeesList>
-            <CheckoutCoffeeCard
-              image={coffee.image}
-              name={coffee.name}
-              price={coffee.price}
-              amount={1}
-            />
+            {itemsInCart.map((item) => (
+              <CheckoutCoffeeCard
+                key={item.name}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+                amount={item.amount}
+              />
+            ))}
           </S.CoffeesList>
           <S.ValuesContainer>
             <S.CheckoutItemsAreaRow>
-              Total de itens <span>R$ 29.70</span>
+              Total de itens <span>R$ {totalForItems}</span>
             </S.CheckoutItemsAreaRow>
             <S.CheckoutItemsAreaRow>
-              Entrega <span>R$ 3.50</span>
+              Entrega <span>R$ {deliveryCost}</span>
             </S.CheckoutItemsAreaRow>
             <S.CheckoutItemsAreaRow isBold>
-              Total <span>R$ 33.20</span>
+              Total <span>R$ {cartTotal}</span>
             </S.CheckoutItemsAreaRow>
           </S.ValuesContainer>
           <S.ConfirmButton type="button">Confirmar Pedido</S.ConfirmButton>

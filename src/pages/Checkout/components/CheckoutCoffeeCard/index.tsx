@@ -2,7 +2,7 @@ import { Minus, Plus, Trash } from 'phosphor-react'
 
 import * as S from './styles'
 
-interface ICheckoutCoffeeCard {
+export interface ICheckoutCoffeeCard {
   image: string
   amount: number
   name: string

@@ -95,12 +95,13 @@ export const PaymentMethodContainer = styled.div`
   }
 `
 
-export const PaymentMethod = styled.button`
+export const PaymentMethod = styled.button<{ isSelected: boolean }>`
   width: 11.25rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: ${(props) => props.theme['base-button']};
+  background: ${(props) =>
+    props.isSelected ? props.theme['purple-light'] : props.theme['base-button']};
   border-radius: 6px;
   padding: 1rem;
   text-transform: uppercase;
@@ -108,6 +109,7 @@ export const PaymentMethod = styled.button`
   line-height: 1.6;
   color: ${(props) => props.theme['base-text']};
   transition: all 0.1s;
+  ${(props) => props.isSelected && `border: 1px solid ${props.theme.purple};`}
   @media (max-width: 435px) {
     width: 100%;
   }
@@ -115,7 +117,7 @@ export const PaymentMethod = styled.button`
     color: ${(props) => props.theme.purple};
   }
   :hover {
-    background: ${(props) => props.theme['base-hover']};
+    ${(props) => !props.isSelected && `background: ${props.theme['base-hover']};`}
     color: ${(props) => props.theme['base-subtitle']};
   }
 `
