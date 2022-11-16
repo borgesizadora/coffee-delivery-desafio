@@ -1,25 +1,30 @@
-import coffeeImage from '~/assets/expresso-tradicional.png'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 
+import { CoffeeType } from '../..'
 import * as S from './styles'
 
-export const CoffeeCard = () => {
+interface ICoffeeCard {
+  coffee: CoffeeType
+}
+
+export const CoffeeCard = ({ coffee }: ICoffeeCard) => {
   return (
     <S.CoffeeCardWrapper>
       <S.CoffeeCardContainer>
-        <img src={coffeeImage} />
+        <img src={coffee.image} />
         <S.LabelsContainer>
-          <S.Label>TRADICIONAL</S.Label>
-          <S.Label>TRADICIONAL</S.Label>
+          {coffee.tags.map((tag) => (
+            <S.Label key={tag}>{tag}</S.Label>
+          ))}
         </S.LabelsContainer>
         <S.CoffeeInfo>
-          <S.Title>Expresso Tradicional</S.Title>
-          <S.Description>O tradicional café feito com água quente e grãos moídos</S.Description>
+          <S.Title>{coffee.name}</S.Title>
+          <S.Description>{coffee.description}</S.Description>
         </S.CoffeeInfo>
         <S.CardFooter>
           <S.CardPrice>
             R$
-            <span>9,90</span>
+            <span>{coffee.price}</span>
           </S.CardPrice>
           <S.CartAndButtonsContainer>
             <S.AddRemoveButtons>

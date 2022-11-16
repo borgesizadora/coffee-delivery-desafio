@@ -48,6 +48,7 @@ export const Label = styled.span`
     font-size: 0.625rem;
     padding: 4px 8px;
     border-radius: 999px;
+    text-transform: uppercase;
   `}
 `
 export const Title = styled.h4`
@@ -96,6 +97,7 @@ export const AddRemoveButtons = styled.div`
       button {
         color: ${theme['purple']};
         transition: color 0.1s;
+        line-height: 0;
         :hover {
           color: ${theme['purple-dark']};
         }

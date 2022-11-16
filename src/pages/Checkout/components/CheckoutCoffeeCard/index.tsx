@@ -1,22 +1,22 @@
-import coffeeImage from '~/assets/expresso-tradicional.png'
 import { Minus, Plus, Trash } from 'phosphor-react'
 
 import * as S from './styles'
 
 interface ICheckoutCoffeeCard {
-  name: string
+  image: string
   amount: number
+  name: string
   price: number
 }
 
-export const CheckoutCoffeeCard = ({ name, amount, price }: ICheckoutCoffeeCard) => {
+export const CheckoutCoffeeCard = ({ image, amount, name, price }: ICheckoutCoffeeCard) => {
   return (
     <S.CardContainer>
-      <img src={coffeeImage} />
+      <img src={image} />
       <div>
         <S.NameAndPrice>
           {name}
-          <span>R$ {price}</span>
+          <span>R$ {price * amount}</span>
         </S.NameAndPrice>
         <S.ButtonsContainer>
           <S.AddRemoveButtons>

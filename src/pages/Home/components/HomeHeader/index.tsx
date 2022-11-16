@@ -1,4 +1,4 @@
-import coffeeImage from '~/assets/coffee-image.png'
+import coffeeImage from '~/assets/coffee-image-header.png'
 import headerBackground from '~/assets/home-header-background.svg'
 import { ShoppingCart, Coffee, Package, Timer } from 'phosphor-react'
 

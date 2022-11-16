@@ -1,3 +1,4 @@
+import { Coffees } from '~/mocks/coffees'
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
 
 import { AddressForm } from './components/AddressForm'
@@ -5,6 +6,8 @@ import { CheckoutCoffeeCard } from './components/CheckoutCoffeeCard'
 import * as S from './styles'
 
 export const Checkout = () => {
+  const coffee = Coffees[0]
+
   return (
     <S.CheckoutContainer>
       <S.AreasContainer>
@@ -40,9 +43,12 @@ export const Checkout = () => {
         <h3>Cafés selecionados</h3>
         <S.CheckoutItemsArea>
           <S.CoffeesList>
-            <CheckoutCoffeeCard name="Expresso Tradicional" amount={1} price={9.99} />
-            <CheckoutCoffeeCard name="Expresso Tradicional" amount={1} price={9.99} />
-            <CheckoutCoffeeCard name="Expresso Tradicional" amount={1} price={9.99} />
+            <CheckoutCoffeeCard
+              image={coffee.image}
+              name={coffee.name}
+              price={coffee.price}
+              amount={1}
+            />
           </S.CoffeesList>
           <S.ValuesContainer>
             <S.CheckoutItemsAreaRow>
