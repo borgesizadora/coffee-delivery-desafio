@@ -58,5 +58,22 @@ export const CartButton = styled.span`
       padding: 0.5rem;
       border-radius: 6px;
       color: ${theme['yellow-dark']};
+      position: relative;
+      & > span {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+        background: ${theme['yellow-dark']};
+        color: ${theme.white};
+        font-size: 0.75rem;
+        font-weight: 700;
+        border-radius: 50%;
+        width: 1.25rem;
+        height: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     `}
 `

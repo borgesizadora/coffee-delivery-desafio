@@ -1,4 +1,5 @@
 import { useCartContext } from '~/contexts/CartContext'
+import { formatMoney } from '~/utils/formatMoney'
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
 
 import { AddressForm } from './components/AddressForm'
@@ -55,24 +56,18 @@ export const Checkout = () => {
         <S.CheckoutItemsArea>
           <S.CoffeesList>
             {itemsInCart.map((item) => (
-              <CheckoutCoffeeCard
-                key={item.name}
-                image={item.image}
-                name={item.name}
-                price={item.price}
-                amount={item.amount}
-              />
+              <CheckoutCoffeeCard key={item.id} amount={item.amount} id={item.id} />
             ))}
           </S.CoffeesList>
           <S.ValuesContainer>
             <S.CheckoutItemsAreaRow>
-              Total de itens <span>R$ {totalForItems}</span>
+              Total de itens <span>R$ {formatMoney(totalForItems)}</span>
             </S.CheckoutItemsAreaRow>
             <S.CheckoutItemsAreaRow>
-              Entrega <span>R$ {deliveryCost}</span>
+              Entrega <span>R$ {formatMoney(deliveryCost)}</span>
             </S.CheckoutItemsAreaRow>
             <S.CheckoutItemsAreaRow isBold>
-              Total <span>R$ {cartTotal}</span>
+              Total <span>R$ {formatMoney(cartTotal)}</span>
             </S.CheckoutItemsAreaRow>
           </S.ValuesContainer>
           <S.ConfirmButton type="button">Confirmar Pedido</S.ConfirmButton>

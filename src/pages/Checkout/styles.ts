@@ -109,7 +109,7 @@ export const PaymentMethod = styled.button<{ isSelected: boolean }>`
   line-height: 1.6;
   color: ${(props) => props.theme['base-text']};
   transition: all 0.1s;
-  ${(props) => props.isSelected && `border: 1px solid ${props.theme.purple};`}
+  border: 1px solid ${(props) => (props.isSelected ? props.theme.purple : 'transparent')};
   @media (max-width: 435px) {
     width: 100%;
   }

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useCartContext } from '~/contexts/CartContext'
+import { formatMoney } from '~/utils/formatMoney'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 
 import { CoffeeType } from '../..'
@@ -12,12 +14,20 @@ interface ICoffeeCard {
 export const CoffeeCard = ({ coffee }: ICoffeeCard) => {
   const [amountToAddToCart, setAmountToAddToCart] = useState(1)
 
+  const { addItemToCart } = useCartContext()
+
   function addOneItemToAmount() {
     setAmountToAddToCart((amount) => amount + 1)
   }
   function removeOneItemToAmount() {
     if (amountToAddToCart > 1) setAmountToAddToCart((amount) => amount - 1)
   }
+
+  function handleAddToCart() {
+    addItemToCart(coffee.id, amountToAddToCart)
+    setAmountToAddToCart(1)
+  }
+
   return (
     <S.CoffeeCardWrapper>
       <S.CoffeeCardContainer>
@@ -34,7 +44,7 @@ export const CoffeeCard = ({ coffee }: ICoffeeCard) => {
         <S.CardFooter>
           <S.CardPrice>
             R$
-            <span>{coffee.price}</span>
+            <span>{formatMoney(coffee.price)}</span>
           </S.CardPrice>
           <S.CartAndButtonsContainer>
             <S.AddRemoveButtons>
@@ -46,7 +56,7 @@ export const CoffeeCard = ({ coffee }: ICoffeeCard) => {
                 <Plus weight="bold" />
               </button>
             </S.AddRemoveButtons>
-            <S.CartButton>
+            <S.CartButton type="button" onClick={handleAddToCart}>
               <ShoppingCart size={22} weight="fill" />
             </S.CartButton>
           </S.CartAndButtonsContainer>
