@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 
 import logoCoffeeDelivery from '~/assets/logo-coffee-delivery.svg'
+import { useAddressContext } from '~/contexts/AddressContext'
 import { useCartContext } from '~/contexts/CartContext'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
@@ -8,6 +9,7 @@ import * as S from './styles'
 
 export const Header = () => {
   const { totalItemsInCart } = useCartContext()
+  const { address } = useAddressContext()
   return (
     <S.HeaderContainer>
       <S.HeaderContent>
@@ -16,9 +18,13 @@ export const Header = () => {
             <img src={logoCoffeeDelivery} alt="" />
           </NavLink>
           <div>
-            <S.AddressButton>
+            <S.AddressButton title="Adicione seu endereço">
               <MapPin size={22} weight="fill" />
-              <span>Porto Alegre, RS</span>
+              {address.city && address.uf && (
+                <span>
+                  {address.city}, {address.uf}
+                </span>
+              )}
             </S.AddressButton>
             <NavLink to="checkout" title="Ir para Checkout">
               <S.CartButton>

@@ -2,10 +2,11 @@ import styled, { css } from 'styled-components'
 
 interface InputProps {
   size: 'small' | 'medium' | 'full'
+  error: boolean
 }
 
 export const Input = styled.div<InputProps>`
-  ${({ theme, size }) => css`
+  ${({ theme, size, error }) => css`
     position: relative;
     width: 100%;
     max-width: ${size === 'small' ? '3.75rem' : size === 'medium' && '12.5rem'};
@@ -16,6 +17,10 @@ export const Input = styled.div<InputProps>`
       width: 100%;
       color: ${theme['base-text']};
       background: ${theme['base-input']};
+      border: 1px solid ${({ theme }) => theme['base-button']};
+      ${error && `box-shadow: 0 0 0 1px ${theme.danger};`}
+      border-radius: 4px;
+      padding: 0.75rem;
 
       ::placeholder {
         color: transparent;

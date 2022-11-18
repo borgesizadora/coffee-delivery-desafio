@@ -1,21 +1,45 @@
+import { UseFormRegister } from 'react-hook-form'
+
+import { maskCep } from '~/utils/masks'
+
+import { AddressFormType } from '../AddressForm'
 import * as S from './styles'
 
 interface InputProps {
-  id: string
+  id: keyof AddressFormType
   inputType: string
   label: string
   isOptional?: boolean
   size: 'small' | 'medium' | 'full'
+  error: boolean
+  isCep?: boolean
+  register: UseFormRegister<AddressFormType>
 }
 
-export const Input = ({ inputType, label, isOptional = false, size, id }: InputProps) => {
+export const Input = ({
+  register,
+  label,
+  isOptional = false,
+  size,
+  id,
+  error,
+  isCep = false
+}: InputProps) => {
+  function handleChange(e: any) {
+    if (isCep) {
+      const { value } = e.target
+      e.target.value = maskCep(value)
+    }
+  }
   return (
-    <S.Input size={size}>
-      <input id={id} type={inputType} placeholder={label} />
-      <label htmlFor={id}>
-        {label}
-        {isOptional && <span>Opcional</span>}
-      </label>
-    </S.Input>
+    <>
+      <S.Input size={size} error={error}>
+        <input id={id} placeholder={label} {...register(id)} onChange={handleChange} />
+        <label htmlFor={id}>
+          {label}
+          {isOptional && <span>Opcional</span>}
+        </label>
+      </S.Input>
+    </>
   )
 }

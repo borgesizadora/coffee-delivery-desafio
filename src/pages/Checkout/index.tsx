@@ -70,7 +70,9 @@ export const Checkout = () => {
               Total <span>R$ {formatMoney(cartTotal)}</span>
             </S.CheckoutItemsAreaRow>
           </S.ValuesContainer>
-          <S.ConfirmButton type="button">Confirmar Pedido</S.ConfirmButton>
+          <S.ConfirmButton type="submit" form="address-form">
+            Confirmar Pedido
+          </S.ConfirmButton>
         </S.CheckoutItemsArea>
       </S.AreasContainer>
     </S.CheckoutContainer>

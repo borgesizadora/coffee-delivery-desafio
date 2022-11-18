@@ -20,11 +20,6 @@ export const AddressForm = styled.form`
       color: ${(props) => props.theme['yellow-dark']};
     }
   }
-  input {
-    border: 1px solid ${({ theme }) => theme['base-button']};
-    border-radius: 4px;
-    padding: 0.75rem;
-  }
 `
 
 export const InputGroupContainer = styled.div`

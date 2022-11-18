@@ -1,16 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 
-export interface AddressType {
-  cep: string
-  street: string
-  number?: string
-  complement?: string
-  neighborhood: string
-  city: string
-}
+import { AddressFormType } from '~/pages/Checkout/components/AddressForm'
+
 interface AddressContextType {
-  address: AddressType
-  setNewAddress: (address: AddressType) => void
+  address: AddressFormType
+  setNewAddress: (address: AddressFormType) => void
 }
 
 const AddressContext = createContext({} as AddressContextType)
@@ -20,9 +14,26 @@ interface AddressContextProviderProps {
 }
 
 export function AddressContextProvider({ children }: AddressContextProviderProps) {
-  const [address, setAddress] = useState<AddressType>({ cep: 'cep', city: 'city' } as AddressType)
+  const storedAddressAsJSON = localStorage.getItem('@coffee-delivery:address-1.0.0')
+  const [address, setAddress] = useState<AddressFormType>(
+    storedAddressAsJSON
+      ? JSON.parse(storedAddressAsJSON)
+      : ({
+          cep: '',
+          street: '',
+          number: '',
+          complement: '',
+          neighborhood: '',
+          city: '',
+          uf: ''
+        } as AddressFormType)
+  )
+  const setNewAddress = (address: AddressFormType) => setAddress(address)
 
-  const setNewAddress = (address: AddressType) => setAddress(address)
+  useEffect(() => {
+    const addressJSON = JSON.stringify(address)
+    localStorage.setItem('@coffee-delivery:address-1.0.0', addressJSON)
+  }, [address])
 
   return (
     <AddressContext.Provider
