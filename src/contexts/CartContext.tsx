@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { Coffees } from '~/mocks/coffees'
 import { ICheckoutCoffeeCard } from '~/pages/Checkout/components/CheckoutCoffeeCard'
@@ -61,6 +62,7 @@ export const CartContextProvider = ({ children }: ICartContextProvider) => {
       : [...oldItems, { id, amount }]
 
     setItemsInCart(itemsWithAddedOne)
+    toast.success('Item adicionado ao carrinho')
   }
 
   function removeOneItemFromCart(id: number) {
@@ -78,6 +80,8 @@ export const CartContextProvider = ({ children }: ICartContextProvider) => {
     })
 
     setItemsInCart(itemsWithAddedOne)
+
+    toast.success('Item removido do carrinho')
   }
 
   function clearCart() {

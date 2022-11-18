@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast'
 import { BrowserRouter } from 'react-router-dom'
 
 import { ThemeProvider } from 'styled-components'
@@ -16,6 +17,7 @@ export function App() {
           <CartContextProvider>
             <Router />
             <GlobalStyle />
+            <Toaster />
           </CartContextProvider>
         </AddressContextProvider>
       </BrowserRouter>
