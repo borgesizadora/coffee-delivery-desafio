@@ -83,6 +83,13 @@ export const CheckoutItemsAreaRow = styled.div<ICheckoutItemsAreaRow>`
   `}
 `
 
+export const PaymentMethodWarning = styled.p`
+  color: ${(props) => props.theme.danger};
+  margin-bottom: 0.2rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+`
+
 export const PaymentMethodContainer = styled.div`
   display: flex;
   align-items: center;

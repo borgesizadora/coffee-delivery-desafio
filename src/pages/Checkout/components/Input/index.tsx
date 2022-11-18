@@ -1,4 +1,4 @@
-import { UseFormRegister } from 'react-hook-form'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
 
 import { maskCep } from '~/utils/masks'
 
@@ -13,7 +13,7 @@ interface InputProps {
   size: 'small' | 'medium' | 'full'
   error: boolean
   isCep?: boolean
-  register: UseFormRegister<AddressFormType>
+  register: UseFormRegister<FieldValues>
 }
 
 export const Input = ({
