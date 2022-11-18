@@ -47,6 +47,7 @@ export const CartContextProvider = ({ children }: ICartContextProvider) => {
     const itemsWithoutRemovedOne = oldItems.filter((item) => item.id !== id)
 
     setItemsInCart(itemsWithoutRemovedOne)
+    toast.success('Item removido do carrinho')
   }
 
   function addItemToCart(id: number, amount: number) {
