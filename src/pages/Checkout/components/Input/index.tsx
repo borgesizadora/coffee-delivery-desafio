@@ -34,7 +34,14 @@ export const Input = ({
   return (
     <>
       <S.Input size={size} error={error}>
-        <input id={id} placeholder={label} {...register(id)} onChange={handleChange} />
+        <input
+          id={id}
+          placeholder={label}
+          {...register(id, {
+            shouldUnregister: true
+          })}
+          onChange={handleChange}
+        />
         <label htmlFor={id}>
           {label}
           {isOptional && <span>Opcional</span>}

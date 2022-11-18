@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import { useAddressContext } from '~/contexts/AddressContext'
 import { useCartContext } from '~/contexts/CartContext'
@@ -9,9 +11,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { AddressForm, addressFormSchema, AddressFormType } from './components/AddressForm'
 import { CheckoutCoffeeCard } from './components/CheckoutCoffeeCard'
+import { ConfirmOrder } from './components/ConfirmOrder'
 import * as S from './styles'
 
+enum Steps {
+  One = 0,
+  Two = 1
+}
+
 export const Checkout = () => {
+  const [stepActive, setStepActive] = useState<Steps>(Steps.One)
+
   const {
     itemsInCart,
     deliveryCost,
@@ -19,7 +29,8 @@ export const Checkout = () => {
     paymentMethod,
     showPaymentNotSelectedError,
     setPayment,
-    setShowPaymentNotSelectedError
+    setShowPaymentNotSelectedError,
+    clearCart
   } = useCartContext()
 
   const { setNewAddress } = useAddressContext()
@@ -37,21 +48,32 @@ export const Checkout = () => {
     }
   })
 
-  const { handleSubmit, formState } = addressForm
+  const { handleSubmit, clearErrors } = addressForm
+  const isCartEmpty = !itemsInCart.length
 
   function handleCheckout() {
     handleSubmit((data) => {
       setNewAddress(data)
+
+      if (!paymentMethod) setShowPaymentNotSelectedError(true)
+
+      if (!paymentMethod || isCartEmpty) {
+        clearErrors()
+        return
+      }
+      clearCart()
+      setStepActive(Steps.Two)
     })()
-
-    if (!paymentMethod) setShowPaymentNotSelectedError(true)
-
-    if (!paymentMethod || !itemsInCart.length || !formState.isValid) return
-    console.log('checkout')
   }
 
   const cartTotal = totalForItems + deliveryCost
-  return (
+
+  useEffect(() => {
+    setShowPaymentNotSelectedError(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return stepActive === 0 ? (
     <FormProvider {...addressForm}>
       <S.CheckoutContainer>
         <S.AreasContainer>
@@ -98,11 +120,18 @@ export const Checkout = () => {
         <S.AreasContainer>
           <h3>Cafés selecionados</h3>
           <S.CheckoutItemsArea>
-            <S.CoffeesList>
-              {itemsInCart.map((item) => (
-                <CheckoutCoffeeCard key={item.id} amount={item.amount} id={item.id} />
-              ))}
-            </S.CoffeesList>
+            {isCartEmpty ? (
+              <S.EmptyCart>
+                <p>Seu carrinho está vazio</p>
+                <Link to="/">Voltar para a página inicial</Link>
+              </S.EmptyCart>
+            ) : (
+              <S.CoffeesList>
+                {itemsInCart.map((item) => (
+                  <CheckoutCoffeeCard key={item.id} amount={item.amount} id={item.id} />
+                ))}
+              </S.CoffeesList>
+            )}
             <S.ValuesContainer>
               <S.CheckoutItemsAreaRow>
                 Total de itens <span>R$ {formatMoney(totalForItems)}</span>
@@ -114,12 +143,14 @@ export const Checkout = () => {
                 Total <span>R$ {formatMoney(cartTotal)}</span>
               </S.CheckoutItemsAreaRow>
             </S.ValuesContainer>
-            <S.ConfirmButton type="button" onClick={handleCheckout}>
+            <S.ConfirmButton type="button" onClick={handleCheckout} disabled={isCartEmpty}>
               Confirmar Pedido
             </S.ConfirmButton>
           </S.CheckoutItemsArea>
         </S.AreasContainer>
       </S.CheckoutContainer>
     </FormProvider>
+  ) : (
+    <ConfirmOrder />
   )
 }

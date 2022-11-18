@@ -18,7 +18,7 @@ export const Header = () => {
             <img src={logoCoffeeDelivery} alt="" />
           </NavLink>
           <div>
-            <S.AddressButton title="Adicione seu endereço">
+            <S.AddressButton title="Configure seu endereço no carrinho">
               <MapPin size={22} weight="fill" />
               {address.city && address.uf && (
                 <span>

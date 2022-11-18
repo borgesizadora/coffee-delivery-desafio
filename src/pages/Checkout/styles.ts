@@ -138,7 +138,27 @@ export const ConfirmButton = styled.button`
   width: 100%;
   margin-top: 1.5rem;
   transition: background-color 0.1s;
-  :hover {
+  :hover:not(:disabled) {
     background: ${(props) => props.theme['yellow-dark']};
+  }
+  :disabled {
+    cursor: not-allowed;
+  }
+`
+
+export const EmptyCart = styled.div`
+  color: ${(props) => props.theme['base-text']};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  width: 100%;
+  border-bottom: 1px solid ${(props) => props.theme['base-button']};
+  a {
+    color: ${(props) => props.theme['base-subtitle']};
+    font-weight: 700;
   }
 `

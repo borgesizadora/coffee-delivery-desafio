@@ -18,6 +18,7 @@ interface CartContextType {
   addItemToCart: (id: number, amount: number) => void
   removeItemFromCart: (id: number) => void
   removeOneItemFromCart: (id: number) => void
+  clearCart: () => void
 }
 
 const CartContext = createContext({} as CartContextType)
@@ -33,7 +34,6 @@ export const CartContextProvider = ({ children }: ICartContextProvider) => {
   const [itemsInCart, setItemsInCart] = useState<ICheckoutCoffeeCard[]>(
     storedCartAsJSON ? JSON.parse(storedCartAsJSON) : []
   )
-  const deliveryCost = DELIVERY_COST
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethodType>()
 
   function setPayment(method: PaymentMethodType) {
@@ -80,6 +80,10 @@ export const CartContextProvider = ({ children }: ICartContextProvider) => {
     setItemsInCart(itemsWithAddedOne)
   }
 
+  function clearCart() {
+    setItemsInCart([])
+  }
+
   function setShowPaymentNotSelectedError(show: boolean) {
     setShowPaymentError(show)
   }
@@ -93,6 +97,8 @@ export const CartContextProvider = ({ children }: ICartContextProvider) => {
     if (coffee) total += item.amount * coffee.price
     return total
   }, 0)
+
+  const deliveryCost = totalForItems ? DELIVERY_COST : 0
 
   useEffect(() => {
     const cartJSON = JSON.stringify(itemsInCart)
@@ -112,7 +118,8 @@ export const CartContextProvider = ({ children }: ICartContextProvider) => {
         setPayment,
         addItemToCart,
         removeItemFromCart,
-        removeOneItemFromCart
+        removeOneItemFromCart,
+        clearCart
       }}>
       {children}
     </CartContext.Provider>
